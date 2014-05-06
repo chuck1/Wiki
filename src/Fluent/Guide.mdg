@@ -1,0 +1,24 @@
+# Fluent Guide
+
+## Main Journal File
+
+### Sections
+
+#### Generic
+#### Models
+#### Materials
+#### UDF
+#### Cell Zone Conditions
+#### Boundary Conditions
+#### Solve
+#### Export
+
+## File Dependencies
+
+![](https://chart.googleapis.com/chart?cht=gv&chl=
+digraph {
+	tecdat -> scriptscm;
+	tecdat -> casecas -> gridpw -> scripttcl -> case
+	scriptscm -> case -> geometry -> design
+}&chs=450x450)
+
