@@ -14,9 +14,7 @@ $$</p>
 
 ## Graphviz
 
-	digraph {
-		a -> b -> c -> a
-	}
+
 
 
 digraph {
