@@ -4,10 +4,11 @@ MKDIR = mkdir -p
 SOURCE_DIR = src
 BINARY_DIR = build
 
-MARKDOWN = perl ~/Documents/Programming/Markdown/Markdown_1.0.1/Markdown.pl --html4tags
+#MARKDOWN = perl ~/Documents/Programming/Markdown/Markdown_1.0.1/Markdown.pl --html4tags
+MARKDOWN = python -m markdown -x tables
 
-MD_FILES = $(shell find $(SOURCE_DIR) -name *.md)
-DOT_FILES = $(shell find $(SOURCE_DIR) -name *.dot)
+MD_FILES = $(shell find $(SOURCE_DIR) -name "*.md")
+DOT_FILES = $(shell find $(SOURCE_DIR) -name "*.dot")
 
 DOT_PNG_FILES = $(patsubst $(SOURCE_DIR)%.dot, $(BINARY_DIR)%.png, $(DOT_FILES))
 
@@ -24,17 +25,17 @@ HEADER2 = "<script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/
 
 $(BIN_PNG_FILES): $(BINARY_DIR)%.png: $(SOURCE_DIR)%.png
 	@$(MKDIR) $(dir $@)
-	@cp $< $@
+	cp $< $@
 
 $(DOT_PNG_FILES): $(BINARY_DIR)%.png: $(SOURCE_DIR)%.dot
 	@$(MKDIR) $(dir $@)
-	@dot -tpng $< > $@
+	dot $< -Tpng -o$@
 	
-$(HTML_FILES): $(SOURCE_DIR)%.html: $(BINARY_DIR)%.md
+$(HTML_FILES): $(BINARY_DIR)%.html: $(SOURCE_DIR)%.md
 	@$(MKDIR) $(dir $@)
 	@echo $(HEADER1) > $@
 	@echo $(HEADER2) >> $@
-	$(MARKDOWN) $< >> $@
+	python render.py $< $@
 
 
 
