@@ -31,7 +31,7 @@ $(DOT_PNG_FILES): $(BINARY_DIR)%.png: $(SOURCE_DIR)%.dot
 	@$(MKDIR) $(dir $@)
 	dot $< -Tpng -o$@
 	
-$(HTML_FILES): $(BINARY_DIR)%.html: $(SOURCE_DIR)%.md
+$(HTML_FILES): $(BINARY_DIR)%.html: $(SOURCE_DIR)%.md template.html render.py
 	@$(MKDIR) $(dir $@)
 	@echo $(HEADER1) > $@
 	@echo $(HEADER2) >> $@

@@ -2,6 +2,7 @@ import markdown
 import argparse
 import re
 import os
+import jinja2
 
 parser = argparse.ArgumentParser()
 parser.add_argument('md_file')
@@ -9,34 +10,49 @@ parser.add_argument('html_file')
 
 args = parser.parse_args()
 
+# read md file
+
 with open(args.md_file, 'r') as f:
-	md_text = f.read()
+	md_str = f.read()
 
-md_dir = os.path.dirname(args.md_file)
+#md_dir = os.path.dirname(args.md_file)
+#m = re.findall('\[.*?\]\((.*?)\)',md_text)
+#for s in m:
+#	src = os.path.join(md_dir, s)
+#	print repr(src)
 
-m = re.findall('\[.*?\]\((.*?)\)',md_text)
 
-for s in m:
-	src = os.path.join(md_dir, s)
-	print repr(src)
+# separate sidebar from center
 
-html_text = markdown.markdown(md_text, extensions=['extra', 'tables'])
+pat = re.compile('^&&&$', flags=re.MULTILINE)
 
-#print html_text
+m = pat.search(md_str)
 
-head = [
-		"<head>\n",
-		"<link href=\"http://kevinburke.bitbucket.org/markdowncss/markdown.css\" rel=\"stylesheet\"></link>\n",
-		"<link href=\"http://web.engr.oregonstate.edu/~rymalc/default.css\" rel=\"stylesheet\"></link>\n",
-		"<script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>\n",
-		"</head>"]
+if m:
+	md_sidebar_str = md_str[:m.start(0)]
+	md_center_str = md_str[m.end(0):]
+else:
+	md_sidebar_str = 'sidebar'
+	md_center_str = md_str
 
-head = ''.join(head)
+html_sidebar_str = markdown.markdown(md_sidebar_str, extensions=['extra', 'tables'])
+html_center_str = markdown.markdown(md_center_str, extensions=['extra', 'tables'])
 
-html_text = head + html_text
+# read template string from file
+
+with open('template.html', 'r') as f:
+	temp_str = f.read();
+
+template = jinja2.Template(temp_str)
+
+# render template
+
+html_str = template.render(sidebar_str=html_sidebar_str, center_str=html_center_str)
+
+# write html file
 
 with open(args.html_file, 'w') as f:
-	f.write(html_text)
+	f.write(html_str)
 
 
 
