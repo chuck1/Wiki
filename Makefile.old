@@ -1,13 +1,4 @@
 
-MKDIR = mkdir -p
-
-SOURCE_DIR = src
-BINARY_DIR = build
-
-#MARKDOWN = perl ~/Documents/Programming/Markdown/Markdown_1.0.1/Markdown.pl --html4tags
-MARKDOWN = python -m markdown -x tables
-
-MD_FILES = $(shell find $(SOURCE_DIR) -name "*.md")
 DOT_FILES = $(shell find $(SOURCE_DIR) -name "*.dot")
 
 DOT_PNG_FILES = $(patsubst $(SOURCE_DIR)%.dot, $(BINARY_DIR)%.png, $(DOT_FILES))
