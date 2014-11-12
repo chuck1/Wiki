@@ -34,6 +34,7 @@ png_files = list(subst(dot_files, '.dot', '.png'))
 
 
 head1 = "<head><link href=\"http://kevinburke.bitbucket.org/markdowncss/markdown.css\" rel=\"stylesheet\"></link>"
+
 head2 = "<script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script></head>"
 
 
