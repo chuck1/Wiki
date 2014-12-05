@@ -1,0 +1,77 @@
+digraph filegraph {
+	node [label="\N"];
+	subgraph cluster_src {
+		graph [label=src];
+		subgraph cluster_src_Fluent {
+			graph [label=Fluent];
+			index_md			 [label="index.md"];
+			Guide_mdg			 [label="Guide.mdg"];
+		}
+		subgraph cluster_src_Engineering {
+			graph [label=Engineering];
+			subgraph cluster_src_Engineering_Materials {
+				graph [label=Materials];
+				subgraph cluster_src_Engineering_Materials_Solid {
+					graph [label=Solid];
+				}
+				subgraph cluster_src_Engineering_Materials_Fluid {
+					graph [label=Fluid];
+					fluids_md					 [label="fluids.md"];
+				}
+			}
+		}
+		subgraph cluster_src_Programming {
+			graph [label=Programming];
+			subgraph cluster_src_Programming_CMake {
+				graph [label=CMake];
+				index_mdg				 [label="index.mdg"];
+			}
+		}
+		subgraph cluster_src_Notes {
+			graph [label=Notes];
+			presentation_md			 [label="presentation.md"];
+		}
+		subgraph cluster_src_SunShot {
+			graph [label=SunShot];
+			subgraph cluster_src_SunShot_meetings {
+				graph [label=meetings];
+				"06_16_14_md"				 [label="06_16_14.md"];
+			}
+			index_md;
+		}
+		subgraph cluster_src_Simulations {
+			graph [label=Simulations];
+			subgraph cluster_src_Simulations_carbon_dioxide {
+				graph [label=carbon_dioxide];
+				subgraph cluster_src_Simulations_carbon_dioxide_rect_channel {
+					graph [label=rect_channel];
+					subgraph cluster_src_Simulations_carbon_dioxide_rect_channel_guide {
+						graph [label=guide];
+						subgraph cluster_src_Simulations_carbon_dioxide_rect_channel_guide_experimental_validation {
+							graph [label=experimental_validation];
+							exp_val_2_md							 [label="exp_val_2.md"];
+						}
+					}
+				}
+			}
+			subgraph cluster_src_Simulations_molten_salt {
+				graph [label=molten_salt];
+			}
+			index_md;
+		}
+		subgraph cluster_src_Personal {
+			graph [label=Personal];
+			camping_md			 [label="camping.md"];
+		}
+		subgraph cluster_src_guide {
+			graph [label=guide];
+			subgraph cluster_src_guide_pointwise {
+				graph [label=pointwise];
+				index_md;
+			}
+		}
+		data_md		 [label="data.md"];
+		abc_dot		 [label="abc.dot"];
+		demo_md		 [label="demo.md"];
+	}
+}

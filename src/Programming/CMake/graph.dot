@@ -1,11 +1,5 @@
-# CMake
-
-## Basic Static Library
-
-### File Relationships
-
 digraph {
-	node CMake
+	CMake
 	subgraph cmake_install {
 		
 		CMake -> configPROJECT_NAMEcmake
